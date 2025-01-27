@@ -483,6 +483,20 @@ torchrun --standalone --nnodes 1 --nproc-per-node 8 vla-scripts/train.py \
 
 We have [LIBERO pretrained models here](https://huggingface.co/collections/Stanford-ILIAD/minivla-675a2a9aca369ff3a6c04e33)
 
+
+### Finetuning MiniVLA on your dataset
+
+save your dataset to `expert_demos` in RLDS format located in `data_root_dir`, and then run the following command:
+
+Run Training
+```bash
+torchrun --standalone --nnodes 1 --nproc-per-node 2 vla-scripts/train.py  \
+    --vla.type "prism-qwen25-dinosiglip-224px+0_5b+mx-bridge" \
+    --pretrained_checkpoint /home/youliang/rail/minivla-vq-bridge-prismatic/checkpoints/step-362500-epoch-21-loss\=0.2259.pt \
+    --hf_token HF_TOKEN --resume_step 362500 --resume_epoch 21 --save_interval 25
+    --data_root_dir /home/youliang/rail/openvla-mini/
+```
+
 ---
 
 ## Action Chunking
